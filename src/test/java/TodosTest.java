@@ -28,4 +28,88 @@ public class TodosTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldSearchEpicAndSimpleTaskTrue() {
+        SimpleTask simpleTask = new SimpleTask(7, "www");
+
+        String[] subtasks = { "qqq", "www", "eee"};
+        Epic epic = new Epic(44, subtasks);
+
+        Meeting meeting = new Meeting(
+                33,
+                "rrr",
+                "ttt",
+                "yyy"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask, epic};
+        Task[] actual = todos.search("www") ;
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+    @Test
+    public void shouldSearchEpicTrue() {
+        SimpleTask simpleTask = new SimpleTask(7, "www");
+
+        String[] subtasks = { "qqq", "www", "eee"};
+        Epic epic = new Epic(44, subtasks);
+
+        Meeting meeting = new Meeting(
+                33,
+                "rrr",
+                "ttt",
+                "yyy"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {epic};
+        Task[] actual = todos.search("qqq") ;
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+    @Test
+    public void shouldSearchFalse() {
+        SimpleTask simpleTask = new SimpleTask(7, "www");
+
+        String[] subtasks = { "qqq", "www", "eee"};
+        Epic epic = new Epic(44, subtasks);
+
+        Meeting meeting = new Meeting(
+                33,
+                "rrr",
+                "ttt",
+                "yyy"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {};
+        Task[] actual = todos.search("NNn") ;
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
 }
